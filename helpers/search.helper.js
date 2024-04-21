@@ -34,7 +34,8 @@ const removeVietnameseTones = (str) => {
 
 module.exports = (query) => {
   let objectSearch = {
-    keyword: ""
+    keyword: "",
+    choice: ""
   };
 
   if(query.keyword) {
@@ -42,6 +43,10 @@ module.exports = (query) => {
 
     const regex = new RegExp(objectSearch.keyword, "i");
     objectSearch.regex = regex;
+  }
+
+  if(query.choice) {
+    objectSearch.choice = query.choice;
   }
 
   return objectSearch;

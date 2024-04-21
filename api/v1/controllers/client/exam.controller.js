@@ -82,7 +82,7 @@ module.exports.detailQuestions = async (req, res) => {
     let objectPagination = paginationHelper(
       {
         currentPage: 1,
-        limitedItem: 2,
+        limitedItem: 5,
       },
       req.query,
       countQuestions
@@ -130,9 +130,14 @@ module.exports.result = async (req, res) => {
       );
 
       if (matchingQuestion) {
-        const check = answer.user_option.some((userAnswer) =>
-          matchingQuestion.rightOption.includes(userAnswer)
-        );
+        let check = true;
+
+        for(const option of answer.user_option) {
+          if(!matchingQuestion.rightOption.includes(option)) {
+            check = false;
+            break;
+          }
+        }
 
         if (check) {
           result += pointPerQuestion;

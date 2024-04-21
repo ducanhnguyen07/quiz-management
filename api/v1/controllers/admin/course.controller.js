@@ -89,8 +89,11 @@ module.exports.changeStatus = async (req, res) => {
       { status: req.body.status }
     );
 
+    const updatedCourse = await Course.findOne({ _id: id });
+
     res.json({
-      code: 200
+      code: 200,
+      updatedCourse: updatedCourse
     });
   } catch (error) {
     res.json({
@@ -111,9 +114,12 @@ module.exports.changeMulti = async (req, res) => {
           { status: value }
         );
 
+        const updatedCourses = await Course.find({ _id: { $in: ids } });
+
         res.json({
           code: 200,
-          message: "Change status successfully!"
+          message: "Change status successfully!",
+          updatedCourses: updatedCourses
         });
         break;
 
@@ -126,9 +132,12 @@ module.exports.changeMulti = async (req, res) => {
           }
         );
 
+        const deletedCourses = await Course.find({ _id: { $in: ids } }).select("deleted");
+
         res.json({
           code: 200,
-          message: "Delete successfully!"
+          message: "Delete successfully!",
+          deletedCourses: deletedCourses
         });
         break;
 
@@ -171,8 +180,11 @@ module.exports.edit = async (req, res) => {
   try {
     await Course.updateOne({ _id: id }, req.body);
 
+    const updateCourse = await Course.findOne({ _id: id });
+
     res.json({
       code: 200,
+      updateCourse: updateCourse
     });
   } catch (error) {
     res.json({
@@ -188,7 +200,7 @@ module.exports.delete = async (req, res) => {
   try {
     await Course.updateOne(
       { _id: id },
-      { deleted: true, deletedAt: new Date() }
+      { deleted: false, deletedAt: new Date() }
     );
 
     res.json({

@@ -15,8 +15,13 @@ module.exports.index = async (req, res) => {
 
     // Search
     const objectSearch = searchHelper(req.query);
-    if (objectSearch.regex) {
-      find.fullName = objectSearch.regex;
+
+    if(objectSearch.choice && objectSearch.regex) {
+      if(objectSearch.choice == "userId") {
+        find.student_code = objectSearch.regex;
+      } else {
+        find.fullName = objectSearch.regex;
+      }
     }
     // End search
 

@@ -84,7 +84,7 @@ module.exports.detailQuestions = async (req, res) => {
     let objectPagination = paginationHelper(
       {
         currentPage: 1,
-        limitedItem: 5,
+        limitedItem: 2,
       },
       req.query,
       countQuestions
@@ -165,11 +165,12 @@ module.exports.edit = async (req, res) => {
     );
 
     const updateExam = await Exam.findOne({ _id: id });
+    const editedQuestions = await Question.find({ exam_id: id });
 
     res.json({
       code: 200,
       exam: updateExam,
-      questions: updatedQuestions
+      questions: editedQuestions
     });
   } catch (error) {
     res.json({

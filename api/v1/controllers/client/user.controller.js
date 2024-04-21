@@ -41,6 +41,7 @@ module.exports.register = async (req, res) => {
     res.json({
       code: 200,
       message: "Creat account successfully!",
+      data: data,
       tokenUser: tokenUser
     });
   } catch (error) {
@@ -221,9 +222,18 @@ module.exports.resetPassword = async (req, res) => {
 // [GET] /api/v1/users/detail
 module.exports.detail = async (req, res) => {
   try {
+    const user = {
+      fullName: req.user.fullName,
+      student_code: req.user.student_code,
+      student_class: req.user.student_class,
+      dob: req.user.dob,
+      address: req.user.address,
+      email: req.user.email,
+      result: req.user.result
+    };
     res.json({
       code: 200,
-      user: req.user
+      user: user
     });
   } catch (error) {
     res.json({
