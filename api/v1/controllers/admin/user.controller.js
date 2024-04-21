@@ -16,7 +16,7 @@ module.exports.index = async (req, res) => {
     // Search
     const objectSearch = searchHelper(req.query);
     if (objectSearch.regex) {
-      find.title = objectSearch.regex;
+      find.fullName = objectSearch.regex;
     }
     // End search
 
@@ -134,8 +134,11 @@ module.exports.edit = async (req, res) => {
     
     await User.updateOne({ _id: id }, req.body);
 
+    const editedUser = await User.findOne({ _id: id });
+
     res.json({
-      code: 200
+      code: 200,
+      editedUser: editedUser
     });
   } catch (error) {
     res.json({

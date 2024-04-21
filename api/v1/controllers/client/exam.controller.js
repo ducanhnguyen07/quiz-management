@@ -144,7 +144,7 @@ module.exports.result = async (req, res) => {
     const user = req.user;
 
     const raw_questions = await Question.find(findQuestions).select(
-      "options rightOption explaination"
+      "question_type description options rightOption explaination"
     );
 
     const objectResult = {};

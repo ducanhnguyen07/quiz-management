@@ -92,8 +92,11 @@ module.exports.edit = async (req, res) => {
     
     await Account.updateOne({ _id: id }, req.body);
 
+    const editedAccount = await Account.findOne({ _id: id, deleted: false }).select("-password -token");
+
     res.json({
-      code: 200
+      code: 200,
+      editedAccount: editedAccount
     });
   } catch (error) {
     res.json({

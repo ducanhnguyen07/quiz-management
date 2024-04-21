@@ -20,14 +20,21 @@ module.exports.dashboard = async (req, res) => {
       let avgPoint = 0;
 
       for(let j=0; j<users.length; j++) {
-        if(users[j].result.length > 0){
+        if(users[j].result.length > 0) {
           const result = users[j].result;
+          let userAvgPoint = 0;
+
           for(let k=0; k<result.length; k++) {
-            if(result[k].exam_id == exams[i].id && !objectExam.fullName.includes(users[j].fullName)){
-              objectExam.fullName.push(users[j].fullName);
-              avgPoint += result[i].result;
+            if(result[k].exam_id == exams[i].id){
+              if(!objectExam.fullName.includes(users[j].fullName)) {
+                objectExam.fullName.push(users[j].fullName);
+              }
+              userAvgPoint += result[k].result;
             }
           }
+
+          userAvgPoint /= result.length;
+          avgPoint += userAvgPoint;
         }
       }
 
