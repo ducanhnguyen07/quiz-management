@@ -130,19 +130,24 @@ module.exports.result = async (req, res) => {
       );
 
       if (matchingQuestion) {
-        let check = true;
+        // let check = true;
 
-        for(const option of answer.user_option) {
-          if(!matchingQuestion.rightOption.includes(option)) {
-            check = false;
-            break;
-          }
-        }
+        // for(const option of answer.user_option) {
+        //   if(!matchingQuestion.rightOption.includes(option)) {
+        //     check = false;
+        //     break;
+        //   }
+        // }
 
-        if (check) {
+        if(answer.user_option === matchingQuestion.rightOption) {
           result += pointPerQuestion;
           rightAnswer += 1;
         }
+
+        // if (check) {
+        //   result += pointPerQuestion;
+        //   rightAnswer += 1;
+        // }
       }
     });
 

@@ -7,13 +7,8 @@ const questionSchema = new mongoose.Schema(
       type: String,
       default: "mc",
     },
-    options: [
-      {
-        option_id: Number,
-        content: String
-      }
-    ],
-    rightOption: [Number],
+    options: [String],
+    rightOption: Number,
     explaination: {
       type: String,
       default: "",
