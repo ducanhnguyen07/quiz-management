@@ -61,7 +61,31 @@ module.exports.detail = async (req, res) => {
       deleted: false,
     });
 
-    res.json(record);
+    const find = {
+      exam_id: id,
+      deleted: false,
+    };
+
+    // Pagination
+    const countQuestions = await Question.countDocuments(find);
+    let objectPagination = paginationHelper(
+      {
+        currentPage: 1,
+        limitedItem: 2,
+      },
+      req.query,
+      countQuestions
+    );
+
+    const questions = await Question.find(find)
+      .limit(objectPagination.limitedItem)
+      .skip(objectPagination.skip);
+
+    res.json({
+      code: 200,
+      record: record,
+      questions: questions
+    });
   } catch (error) {
     res.json({
       code: 400,
