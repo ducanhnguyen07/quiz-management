@@ -241,3 +241,35 @@ module.exports.detail = async (req, res) => {
     });
   }
 };
+
+module.exports.validateAuth = async (req, res, next) => {
+  try {
+    if(req.headers.authorization) {
+      const tokenUser = req.headers.authorization.split(" ")[1];
+      
+      const user = await User.findOne({
+        tokenUser: tokenUser,
+        deleted: false
+      });
+  
+      if(!user) {
+        res.json({
+          code: 400
+        });
+        return;
+      }
+      res.json({
+        code: 200,
+        message: "Accepted"
+      });
+    } else {
+      res.json({
+        code: 400
+      });
+    }
+  } catch (error) {
+    res.json({
+      code: 400
+    });
+  }
+};
