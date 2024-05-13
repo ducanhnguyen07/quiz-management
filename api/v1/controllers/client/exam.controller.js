@@ -184,10 +184,11 @@ module.exports.result = async (req, res) => {
 
     const objectResult = {};
 
-    objectResult.exam_id = id;
-    objectResult.answers = answers;
+    // objectResult.exam_id = id;
+    objectResult.title = exam.title;
+    // objectResult.answers = answers;
     objectResult.result = result;
-    objectResult.raw_questions = raw_questions;
+    // objectResult.raw_questions = raw_questions;
     if (exam.type == "unlimited") {
       objectResult.timeDoneExam = Date.now();
     } else {
