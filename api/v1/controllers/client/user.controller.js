@@ -273,3 +273,18 @@ module.exports.validateAuth = async (req, res, next) => {
     });
   }
 };
+
+module.exports.result = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const result = user.result;
+    res.json({
+      code: 200,
+      result: result
+    });
+  } catch (error) {
+    res.json({
+      code:400
+    });
+  }
+};

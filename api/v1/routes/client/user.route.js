@@ -21,4 +21,6 @@ router.get("/detail", authMiddleware.requireAuth, controller.detail);
 
 router.get("/validate", controller.validateAuth);
 
+router.get("/result", authMiddleware.requireAuth, controller.result);
+
 module.exports = router;
