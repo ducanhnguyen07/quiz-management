@@ -32,11 +32,12 @@ module.exports.dashboard = async (req, res) => {
               userAvgPoint += result[k].result;
             }
           }
-
+          
           userAvgPoint /= result.length;
           avgPoint += userAvgPoint;
         }
       }
+      
 
       objectExam.countUser = objectExam.fullName.length;
       objectExam.completePercent = objectExam.countUser/users.length;

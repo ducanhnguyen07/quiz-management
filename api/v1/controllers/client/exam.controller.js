@@ -184,7 +184,7 @@ module.exports.result = async (req, res) => {
 
     const objectResult = {};
 
-    // objectResult.exam_id = id;
+    objectResult.exam_id = id;
     objectResult.title = exam.title;
     // objectResult.answers = answers;
     objectResult.result = result;
